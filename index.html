@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektricitet & Magnetism — Provträning åk 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF7F0;
+    --bg-card: #FFFFFF;
+    --ink: #1A2942;
+    --ink-soft: #4A5568;
+    --ink-faint: #8896AB;
+    --line: #E8E2D4;
+    --line-soft: #F0EAD9;
+    --copper: #B5651D;
+    --copper-bright: #D17B2D;
+    --copper-soft: #FBF0E0;
+    --pole-red: #D04141;
+    --fact-bg: #EAF2F8;
+    --fact-border: #4A7BA6;
+    --fact-ink: #1F3A5C;
+    --tricky-bg: #FCEBD9;
+    --tricky-border: #D89A5C;
+    --tricky-ink: #6B3A12;
+    --highlight: #FFF3CD;
+    --gloss-bg: #F4EFE2;
+    --gloss-accent: #5C4B2E;
+    --shadow-sm: 0 2px 8px rgba(26, 41, 66, 0.06);
+    --shadow-md: 0 6px 20px rgba(26, 41, 66, 0.08);
+    --radius: 14px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+
+  body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(181, 101, 29, 0.025) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(26, 41, 66, 0.025) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== SIDEBAR ===== */
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 28px 18px 28px 28px;
+    border-right: 1px solid var(--line);
+    background: rgba(250, 247, 240, 0.9);
+    backdrop-filter: blur(8px);
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .brand span { color: var(--copper); }
+  .brand-sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 26px;
+    font-weight: 600;
+  }
+
+  .nav-section { margin-bottom: 22px; }
+  .nav-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--copper);
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+  .nav-list { list-style: none; }
+  .nav-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14.5px;
+    border-radius: 8px;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+  .nav-list a:hover { background: var(--copper-soft); color: var(--copper); }
+  .nav-list a.active { background: var(--ink); color: white; }
+  .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 24px;
+    color: var(--copper);
+  }
+  .nav-list a.active .nav-num { color: var(--copper-bright); }
+  .nav-list a.tricky .nav-num { color: var(--tricky-border); }
+  .nav-list a.gloss .nav-num { color: var(--gloss-accent); }
+
+  /* ===== MAIN ===== */
+  main {
+    padding: 56px 64px 96px 64px;
+    max-width: 1100px;
+  }
+
+  .intro {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+  }
+  .intro h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .intro h1 em {
+    font-style: italic;
+    color: var(--copper);
+    font-weight: 500;
+  }
+  .intro p {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 720px;
+    line-height: 1.55;
+  }
+  .intro-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .intro-meta span { display: flex; align-items: center; gap: 6px; }
+  .intro-meta span::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--copper);
+    border-radius: 50%;
+  }
+
+  /* ===== ORDLISTA ===== */
+  .glossary {
+    background: var(--gloss-bg);
+    border: 1px solid #D9CFB3;
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+  .glossary-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .glossary-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gloss-accent);
+    letter-spacing: -0.5px;
+  }
+  .glossary-header .gloss-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gloss-accent);
+    opacity: 0.6;
+    font-weight: 600;
+  }
+  .glossary-sub {
+    font-size: 15px;
+    color: var(--gloss-accent);
+    opacity: 0.8;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .gloss-cat {
+    margin-top: 22px;
+  }
+  .gloss-cat h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--copper);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #D9CFB3;
+  }
+  .gloss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0;
+  }
+  .gloss-item {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 6px;
+    transition: background 0.15s;
+  }
+  .gloss-item:hover {
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .gloss-item summary {
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  .gloss-item summary::-webkit-details-marker { display: none; }
+  .gloss-item summary::before {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--copper);
+    font-weight: 600;
+    font-size: 14px;
+    width: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .gloss-item[open] summary::before {
+    content: '−';
+  }
+  .gloss-item p {
+    padding: 0 14px 14px 36px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 44px 48px 40px 48px;
+    margin-bottom: 32px;
+    scroll-margin-top: 24px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .card-num {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--copper);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    flex-shrink: 0;
+    font-style: italic;
+  }
+  .card-title { flex: 1; padding-top: 4px; }
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--copper);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card-title h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+  }
+  .card-content {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .card-content p { margin-bottom: 16px; }
+  .card-content p.lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 22px;
+    border-left: 3px solid var(--copper);
+    padding-left: 18px;
+    font-weight: 500;
+  }
+  .card-content strong { font-weight: 600; color: var(--ink); }
+  .card-content em { font-style: italic; color: var(--ink-soft); }
+  .card-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+  .card-content h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--copper);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  .card-content ul, .card-content ol {
+    padding-left: 0;
+    margin-bottom: 18px;
+    list-style: none;
+  }
+  .card-content ul li, .card-content ol li {
+    padding-left: 28px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .card-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0.7em;
+    width: 7px;
+    height: 7px;
+    background: var(--copper);
+    border-radius: 50%;
+  }
+  .card-content ol { counter-reset: step; }
+  .card-content ol li { counter-increment: step; }
+  .card-content ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--ink);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 4px;
+  }
+
+  .steps { display: grid; gap: 14px; margin: 22px 0; }
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    padding: 18px 20px;
+    background: var(--copper-soft);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--copper);
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--copper);
+    font-style: italic;
+  }
+  .step-content strong:first-child {
+    display: block;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+  }
+
+  .figure {
+    margin: 30px 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: white;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--line);
+  }
+  .figure img { width: 100%; height: auto; display: block; }
+  .figure figcaption {
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    font-style: italic;
+  }
+  .figures-stacked .figure { margin-bottom: 16px; }
+  .figures-stacked .figure:last-child { margin-bottom: 30px; }
+
+  .callout {
+    background: var(--highlight);
+    border: 1px solid #E8D89C;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 22px 0;
+  }
+  .callout-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #6B5510;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .table-wrap { overflow-x: auto; margin: 22px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    background: white;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  th {
+    background: var(--ink);
+    color: white;
+    text-align: left;
+    padding: 12px 16px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--bg); }
+
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    background: var(--ink);
+    color: white;
+    padding: 18px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 22px 0;
+    letter-spacing: 1px;
+  }
+
+  .source {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .source::before { content: '📖 '; margin-right: 4px; }
+
+  /* ===== VISSTE DU ATT-BOX ===== */
+  .fact {
+    margin-top: 28px;
+    background: var(--fact-bg);
+    border-left: 4px solid var(--fact-border);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+  }
+  .fact-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .fact-icon {
+    font-size: 18px;
+  }
+  .fact-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--fact-ink);
+    letter-spacing: -0.2px;
+    font-style: italic;
+  }
+  .fact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .fact-list li {
+    padding: 6px 0 6px 18px;
+    margin-bottom: 4px;
+    position: relative;
+    color: var(--fact-ink);
+    line-height: 1.55;
+    font-size: 15.5px;
+  }
+  .fact-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--fact-border);
+    font-weight: 600;
+  }
+  .fact-list li strong {
+    color: var(--fact-ink);
+    font-weight: 700;
+  }
+
+  /* ===== TRICKY ===== */
+  .tricky-section-header {
+    margin: 60px 0 32px 0;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--tricky-border);
+  }
+  .tricky-section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .tricky-section-header h2 em {
+    color: var(--tricky-border);
+    font-style: italic;
+  }
+  .tricky-section-header p {
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+
+  .card.tricky {
+    border-left: 5px solid var(--tricky-border);
+    background: linear-gradient(to right, var(--tricky-bg) 0%, white 6%, white 100%);
+  }
+  .card.tricky .card-num { color: var(--tricky-border); }
+  .card.tricky .card-tag { color: var(--tricky-border); }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-divider {
+    margin: 56px 0 32px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-divider h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .section-divider .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--copper);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER NAV ===== */
+  .card-footer-nav {
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card-footer-nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.15s;
+    border: 1px solid var(--line);
+  }
+  .card-footer-nav a:hover {
+    background: var(--copper-soft);
+    border-color: var(--copper);
+    color: var(--copper);
+  }
+  .card-footer-nav a.disabled { opacity: 0.3; pointer-events: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; }
+    aside {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    main { padding: 40px 36px 80px 36px; }
+    .card { padding: 32px 28px; }
+    .glossary { padding: 28px 24px; }
+    .intro h1 { font-size: 42px; }
+    .card-num { font-size: 44px; }
+    .card-title h2 { font-size: 26px; }
+  }
+  @media (max-width: 600px) {
+    main { padding: 28px 18px 60px 18px; }
+    .card { padding: 24px 20px; }
+    .card-header { gap: 14px; }
+    .card-num { font-size: 36px; }
+    .card-title h2 { font-size: 22px; }
+    .intro h1 { font-size: 34px; }
+    .formula { font-size: 17px; padding: 14px; }
+    .gloss-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    aside { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    main { padding: 0; }
+    .card { box-shadow: none; break-inside: avoid; }
+    .gloss-item { break-inside: avoid; }
+    .gloss-item p { display: block !important; padding: 0 14px 14px 36px !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Elektricitet<br>&amp; <span>magnetism</span></div>
+  <div class="brand-sub">Provträning åk 9</div>
+
+  <div class="nav-section">
+    <h3>Översikt</h3>
+    <ul class="nav-list">
+      <li><a href="#ordlista" class="gloss"><span class="nav-num">📖</span>Ordlista</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Begrepp</h3>
+    <ul class="nav-list">
+      <li><a href="#k1"><span class="nav-num">01</span>Elektrisk ström</a></li>
+      <li><a href="#k2"><span class="nav-num">02</span>Spänning</a></li>
+      <li><a href="#k3"><span class="nav-num">03</span>Magnetism</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Strömkällor</h3>
+    <ul class="nav-list">
+      <li><a href="#k4"><span class="nav-num">04</span>Batteri</a></li>
+      <li><a href="#k5"><span class="nav-num">05</span>Generator</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Magnetism &amp; ström</h3>
+    <ul class="nav-list">
+      <li><a href="#k6"><span class="nav-num">06</span>Strömförande ledare</a></li>
+      <li><a href="#k7"><span class="nav-num">07</span>Elektromagnet</a></li>
+      <li><a href="#k8"><span class="nav-num">08</span>Starkare elektromagnet</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Elmotor &amp; generator</h3>
+    <ul class="nav-list">
+      <li><a href="#k9"><span class="nav-num">09</span>Enkel elmotor</a></li>
+      <li><a href="#k10"><span class="nav-num">10</span>Motor vs generator</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Induktion</h3>
+    <ul class="nav-list">
+      <li><a href="#k11"><span class="nav-num">11</span>Vad är induktion?</a></li>
+      <li><a href="#k12"><span class="nav-num">12</span>Hur ström uppstår</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Transformator</h3>
+    <ul class="nav-list">
+      <li><a href="#k13"><span class="nav-num">13</span>Vad gör den?</a></li>
+      <li><a href="#k14"><span class="nav-num">14</span>Primär &amp; sekundär</a></li>
+      <li><a href="#k15"><span class="nav-num">15</span>Varv &amp; spänning</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <h3>Fördjupning</h3>
+    <ul class="nav-list">
+      <li><a href="#t1" class="tricky"><span class="nav-num">T1</span>Trafo + likström</a></li>
+      <li><a href="#t2" class="tricky"><span class="nav-num">T2</span>Kraftledningar</a></li>
+      <li><a href="#t3" class="tricky"><span class="nav-num">T3</span>DC vs AC</a></li>
+      <li><a href="#t4" class="tricky"><span class="nav-num">T4</span>Kompass &amp; nord</a></li>
+      <li><a href="#t5" class="tricky"><span class="nav-num">T5</span>Dela en magnet</a></li>
+    </ul>
+  </div>
+</aside>
+
+<main>
+
+<section class="intro">
+  <h1>Elektricitet &amp; <em>magnetism</em></h1>
+  <p>Allt du behöver kunna till provet — förklarat steg för steg, med bilder, vardagsexempel och spännande fakta.</p>
+  <div class="intro-meta">
+    <span>Ordlista</span>
+    <span>15 grundfrågor</span>
+    <span>5 fördjupningar</span>
+  </div>
+</section>
+
+<!-- ============== ORDLISTA ============== -->
+<section class="glossary" id="ordlista">
+  <div class="glossary-header">
+    <h2>Ordlista</h2>
+    <span class="gloss-tag">Klicka på begreppet</span>
+  </div>
+  <p class="glossary-sub">De viktigaste begreppen du behöver kunna till provet. Klicka på ett begrepp för att se förklaringen.</p>
+
+  <div class="gloss-cat">
+    <h3>Grunder</h3>
+    <div class="gloss-grid">
+      <details class="gloss-item"><summary>Elektrisk ström</summary><p>När elektroner rör sig i samma riktning genom en metalltråd. Mäts i ampere (A).</p></details>
+      <details class="gloss-item"><summary>Spänning</summary><p>Skillnaden i elektrisk laddning mellan två punkter — den kraft som driver elektroner att röra sig. Mäts i volt (V).</p></details>
+      <details class="gloss-item"><summary>Ledare</summary><p>Material som leder elektricitet — oftast en metalltråd där elektronerna kan röra sig fritt.</p></details>
+      <details class="gloss-item"><summary>Krets</summary><p>Den slutna "rundbanan" från strömkällans ena pol, genom apparaten, tillbaka till andra polen. Bryts kretsen → ingen ström.</p></details>
+      <details class="gloss-item"><summary>Ampere (A)</summary><p>Enheten för elektrisk ström. Mäts med en amperemeter. 1 A = 1 000 milliampere (mA).</p></details>
+      <details class="gloss-item"><summary>Volt (V)</summary><p>Enheten för elektrisk spänning. Mäts med en voltmeter.</p></details>
+      <details class="gloss-item"><summary>Pluspol &amp; minuspol</summary><p>De två ändarna på ett batteri. Vid minuspolen finns överskott av elektroner, vid pluspolen färre.</p></details>
+    </div>
+  </div>
+
+  <div class="gloss-cat">
+    <h3>Magnetism</h3>
+    <div class="gloss-grid">
+      <details class="gloss-item"><summary>Magnetism</summary><p>Osynlig kraft som vissa material (järn, nickel, kobolt) utövar på andra magnetiska material — utan att behöva röra dem.</p></details>
+      <details class="gloss-item"><summary>Magnetfält</summary><p>Det osynliga "kraft-området" runt en magnet eller en strömförande ledare där magnetisk verkan känns.</p></details>
+      <details class="gloss-item"><summary>Nordpol (N)</summary><p>Den ena änden av en magnet. Markeras ofta med rött. Pekar mot jordens magnetiska sydpol.</p></details>
+      <details class="gloss-item"><summary>Sydpol (S)</summary><p>Den andra änden av en magnet. Markeras ofta med vitt.</p></details>
+      <details class="gloss-item"><summary>Attrahera</summary><p>Olika magnetpoler (N och S) dras mot varandra.</p></details>
+      <details class="gloss-item"><summary>Repellera</summary><p>Lika magnetpoler (N och N, eller S och S) stöter bort varandra.</p></details>
+      <details class="gloss-item"><summary>Influens</summary><p>När ett föremål av järn blir tillfälligt magnetiskt genom att vara nära en magnet. Försvinner när magneten tas bort.</p></details>
+      <details class="gloss-item"><summary>Missvisning</summary><p>Vinkeln mellan kompassens riktning (mot magnetiska sydpolen) och den geografiska Nordpolen. I Sverige ca 5–10 grader.</p></details>
+      <details class="gloss-item"><summary>Fältlinjer</summary><p>Ett sätt att rita magnetfältet. Linjerna går från nordpolen till sydpolen.</p></details>
+    </div>
+  </div>
+
+  <div class="gloss-cat">
+    <h3>Elektromagnetism</h3>
+    <div class="gloss-grid">
+      <details class="gloss-item"><summary>Elektromagnet</summary><p>En magnet som bara fungerar när det går ström genom den. Kan stängas av — till skillnad från en vanlig magnet.</p></details>
+      <details class="gloss-item"><summary>Spole</summary><p>En lång isolerad metalltråd lindad många varv. Blir en elektromagnet när det går ström genom den.</p></details>
+      <details class="gloss-item"><summary>Järnkärna</summary><p>Bit av järn inuti en spole. Förstärker magnetfältet kraftigt — 100–1000 gånger.</p></details>
+      <details class="gloss-item"><summary>Induktion</summary><p>När ett föränderligt magnetfält skapar en elektrisk ström i en närliggande spole. Motsatsen till elektromagnetism.</p></details>
+      <details class="gloss-item"><summary>Induktionsström</summary><p>Den ström som uppstår genom induktion när magnetfältet ändras.</p></details>
+      <details class="gloss-item"><summary>Kommutator</summary><p>Liten del på elmotorns axel som vänder strömmens riktning automatiskt varje halvt varv. Gör att motorn kan rotera kontinuerligt.</p></details>
+      <details class="gloss-item"><summary>Högerhandsregeln</summary><p>Tumregel för att hitta magnetfältets riktning runt en strömförande ledare: tummen i strömmens riktning → fingrarna pekar i fältets riktning.</p></details>
+    </div>
+  </div>
+
+  <div class="gloss-cat">
+    <h3>Elnätet</h3>
+    <div class="gloss-grid">
+      <details class="gloss-item"><summary>Generator</summary><p>Maskin som omvandlar rörelse till elektrisk ström. Finns i alla kraftverk.</p></details>
+      <details class="gloss-item"><summary>Elmotor</summary><p>Maskin som omvandlar elektrisk ström till rörelse. Motsatsen till en generator.</p></details>
+      <details class="gloss-item"><summary>Likström (DC)</summary><p>Ström som alltid går åt samma håll. Kommer från batterier och solceller.</p></details>
+      <details class="gloss-item"><summary>Växelström (AC)</summary><p>Ström som byter riktning hela tiden. Kommer från generatorer och vägguttag (230 V i Sverige).</p></details>
+      <details class="gloss-item"><summary>Frekvens</summary><p>Hur ofta växelströmmen byter riktning. I Sverige 50 Hz = 100 byten per sekund.</p></details>
+      <details class="gloss-item"><summary>Transformator</summary><p>Apparat som höjer eller sänker elektrisk spänning. Fungerar bara med växelström.</p></details>
+      <details class="gloss-item"><summary>Primärspole</summary><p>Den spole i en transformator som kopplas till spänningskällan (där strömmen kommer in).</p></details>
+      <details class="gloss-item"><summary>Sekundärspole</summary><p>Den spole i en transformator som kopplas till apparaten (där den nya spänningen kommer ut).</p></details>
+      <details class="gloss-item"><summary>Transformera upp</summary><p>Höja spänningen. Sker när sekundärspolen har fler varv än primärspolen.</p></details>
+      <details class="gloss-item"><summary>Transformera ner</summary><p>Sänka spänningen. Sker när sekundärspolen har färre varv än primärspolen.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BEGREPP ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 1 · Begrepp</div>
+  <h2>Vad är ström, spänning och magnetism?</h2>
+</div>
+
+<!-- ====== KORT 1 ====== -->
+<article class="card" id="k1">
+  <div class="card-header">
+    <div class="card-num">01</div>
+    <div class="card-title">
+      <div class="card-tag">Begrepp</div>
+      <h2>Vad menas med elektrisk ström?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du tänder en ficklampa. När du trycker på knappen lyser lampan direkt. Vad är det egentligen som händer i sladden mellan batteriet och lampan?</p>
+
+    <p>Det går en <strong>elektrisk ström</strong> — och det är just det vi ska förstå.</p>
+
+    <h3>Definitionen</h3>
+    <p><strong>Elektrisk ström är när elektroner rör sig i samma riktning genom en metalltråd.</strong></p>
+
+    <h4>Tre saker måste finnas för att ström ska kunna gå:</h4>
+    <ol>
+      <li><strong>Elektroner som kan röra sig fritt</strong> — finns naturligt i metaller som koppar och aluminium.</li>
+      <li><strong>Något som driver dem</strong> — en spänningskälla, t.ex. ett batteri (kort 2 och 4).</li>
+      <li><strong>En sluten krets</strong> — en obruten "rundbana" från batteriets minuspol, genom lampan, och tillbaka till pluspolen. Bryts kretsen någonstans (strömbrytaren av) → ingen ström.</li>
+    </ol>
+
+    <h3>Hur mäts ström?</h3>
+    <p>Ström mäts i enheten <strong>ampere (A)</strong> med en <strong>amperemeter</strong>. För svaga strömmar används <strong>milliampere (mA)</strong>: 1 A = 1 000 mA.</p>
+
+    <p>Namnet kommer från fransmannen André Marie Ampère, som studerade elektricitet på 1800-talet.</p>
+
+    <figure class="figure">
+      <img src="1.png" alt="Ficklampa med synliga elektroner i kretsen">
+      <figcaption>I ficklampan rör sig elektronerna från batteriets minuspol genom sladden, lampan och tillbaka. Den rörelsen är vad vi kallar elektrisk ström.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 3.2 Spänning, ström och resistans, s. 47.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Elektronerna i en sladd rör sig faktiskt <strong>otroligt långsamt</strong> — bara några millimeter per sekund. Det är själva <em>signalen</em> som går nära ljusets hastighet, ungefär som vågor i ett rör fullt med tennisbollar.</li>
+        <li>I ett vanligt blixtnedslag flödar runt <strong>30 000 ampere</strong> — jämför med din telefonladdare som tar runt 2 ampere.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#ordlista" class="disabled">← Ordlistan</a>
+    <a href="#k2">Nästa: Spänning →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 2 ====== -->
+<article class="card" id="k2">
+  <div class="card-header">
+    <div class="card-num">02</div>
+    <div class="card-title">
+      <div class="card-tag">Begrepp</div>
+      <h2>Vad är spänning?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">När du tar fram mobilladdaren ser du på baksidan att den ger ut "5 V". Vad betyder den siffran egentligen? Och varför har vägguttaget 230 V?</p>
+
+    <p>Det är <strong>elektrisk spänning</strong> — den kraft som driver elektronerna att röra sig.</p>
+
+    <h3>Vad är spänning?</h3>
+    <p><strong>Spänning är skillnaden i elektrisk laddning mellan två punkter</strong> — t.ex. mellan minus- och pluspolen på ett batteri.</p>
+
+    <p>Vid <strong>minuspolen</strong> finns ett <strong>överskott av elektroner</strong>. Vid <strong>pluspolen</strong> finns färre elektroner. Det är denna skillnad som driver elektronerna att röra sig så fort de får en väg — alltså när kretsen sluts.</p>
+
+    <p>Ju större skillnaden är, desto <strong>högre</strong> är spänningen, och desto <strong>kraftigare</strong> drivs elektronerna.</p>
+
+    <h3>Hur mäts spänning?</h3>
+    <p>Spänning mäts i enheten <strong>volt (V)</strong> med en <strong>voltmeter</strong>. Namnet kommer från italienaren Alessandro Volta, som byggde det första batteriet för ungefär 200 år sedan.</p>
+
+    <h3>Olika spänningar i vardagen</h3>
+    <ul>
+      <li><strong>1,5 V</strong> — vanligt AA- eller AAA-batteri</li>
+      <li><strong>9 V</strong> — fyrkantigt batteri (t.ex. brandvarnare)</li>
+      <li><strong>5 V</strong> — USB-laddare</li>
+      <li><strong>12 V</strong> — bilbatteri</li>
+      <li><strong>230 V</strong> — vägguttag (Sverige)</li>
+      <li><strong>400 000 V</strong> — högspänningsledningar</li>
+    </ul>
+
+    <figure class="figure">
+      <img src="2.png" alt="Spänning förklarad — skillnad i laddning mellan poler">
+      <figcaption>Spänning är skillnaden i elektronöverskott mellan minus- och pluspolen. Det är denna skillnad som driver strömmen när kretsen sluts.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 3.2 Spänning, ström och resistans, s. 46.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Den första funktionerande elektriska spänningskällan byggdes <strong>1800</strong> av Alessandro Volta — <em>en stapel av silver- och zinkmynt</em> separerade med tygbitar dränkta i saltvatten.</li>
+        <li>Elektriska ålar kan generera spänningsstötar på upp till <strong>600 V</strong> — fyra gånger mer än ett vägguttag — för att fånga byten och försvara sig.</li>
+        <li>Olika länder använder olika spänningar i vägguttagen. <strong>Sverige har 230 V</strong>, men USA har bara 120 V — det är därför du behöver en adapter när du reser dit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k1">← Kort 1: Ström</a>
+    <a href="#k3">Nästa: Magnetism →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 3 ====== -->
+<article class="card" id="k3">
+  <div class="card-header">
+    <div class="card-num">03</div>
+    <div class="card-title">
+      <div class="card-tag">Begrepp</div>
+      <h2>Vad är magnetism?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig en kylskåpsmagnet. Du för den nära kylskåpsdörren — och plötsligt fastnar den, utan att du gör något. Hur kan en stilla magnet dra i metallen utan att röra den först?</p>
+
+    <h3>Vad är magnetism?</h3>
+    <p><strong>Magnetism är en osynlig kraft som vissa material kan utöva på andra magnetiska material</strong> — utan att de behöver röra varandra. Kraften verkar på avstånd, genom luften.</p>
+
+    <h3>Varje magnet har två poler</h3>
+    <ul>
+      <li><strong>Nordpol (N)</strong> — markeras ofta med rött</li>
+      <li><strong>Sydpol (S)</strong> — markeras ofta med vitt</li>
+    </ul>
+
+    <p>Det går <strong>aldrig</strong> att ha en magnet med bara N eller bara S. Båda finns alltid.</p>
+
+    <h3>Reglerna mellan poler</h3>
+    <ul>
+      <li><strong>Olika</strong> poler (N och S) <strong>attraherar</strong> — dras mot varandra</li>
+      <li><strong>Lika</strong> poler (N och N, eller S och S) <strong>repellerar</strong> — stöter bort varandra</li>
+    </ul>
+
+    <h3>Varför är vissa material magnetiska?</h3>
+    <p>I material som <strong>järn, nickel och kobolt</strong> finns små "minimagneter" inuti — varje atom är som en pytteliten magnet. När alla atomers magnetfält pekar åt samma håll uppstår ett tydligt magnetfält som vi kan känna.</p>
+
+    <p>I omagnetiska material (som plast, trä, aluminium) pekar atomernas små magneter åt slumpmässiga håll → effekten tar ut sig själv → inget magnetfält.</p>
+
+    <h3>Jorden är en gigantisk magnet</h3>
+    <p>Det är därför en <strong>kompass</strong> alltid pekar norrut. Kompassens nål är en liten magnet, och jorden är en stor — kompassens nordspets dras mot jordens magnetiska sydpol (som ligger nära den geografiska Nordpolen, se T4).</p>
+
+    <figure class="figure">
+      <img src="3.png" alt="Magnetism — kylskåpsmagneter, atomer i järn, attraktion och repulsion">
+      <figcaption>Magnetism kommer från att atomerna inuti materialet alla pekar åt samma håll. Olika poler attraherar, lika poler repellerar.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 9.1 Magnetism, s. 216–219.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Många <strong>flyttfåglar har magnetit</strong> i näbben och kan "se" jordens magnetfält. Det är så de hittar vägen tusentals kilometer söderut på vintern utan att gå vilse.</li>
+        <li>Jordens magnetfält har <strong>vänt riktning ungefär 183 gånger</strong> de senaste 80 miljoner åren — Nord och Syd byter plats. Senast hände det för 780 000 år sedan.</li>
+        <li>Kiruna i norra Sverige har världens största underjordiska järnmalmsgruva — och malmen där (svartmalm) är så magnetisk att den <strong>stör kompasser</strong> i området.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k2">← Kort 2: Spänning</a>
+    <a href="#k4">Nästa: Batteri →</a>
+  </div>
+</article>
+
+<!-- ============== STRÖMKÄLLOR ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 2 · Strömkällor</div>
+  <h2>Hur skapas strömmen?</h2>
+</div>
+
+<!-- ====== KORT 4 ====== -->
+<article class="card" id="k4">
+  <div class="card-header">
+    <div class="card-num">04</div>
+    <div class="card-title">
+      <div class="card-tag">Strömkällor</div>
+      <h2>Hur fungerar ett batteri?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du sätter i ett nytt batteri i fjärrkontrollen. Den fungerar igen — men var kommer egentligen energin från? Hur kan ett litet metallföremål få elektroner att röra sig?</p>
+
+    <h3>Vad är ett batteri?</h3>
+    <p><strong>Ett batteri är en behållare med kemikalier som genom kemiska reaktioner skapar en elektrisk spänning</strong> mellan sina två poler.</p>
+
+    <h3>Två poler — pluspol och minuspol</h3>
+    <ul>
+      <li><strong>Minuspolen (−)</strong> — där det finns ett <strong>överskott</strong> av elektroner. Markeras ofta med svart eller den platta änden.</li>
+      <li><strong>Pluspolen (+)</strong> — där det finns färre elektroner. Markeras ofta med röd eller den utstickande änden.</li>
+    </ul>
+
+    <p>Skillnaden i laddning mellan polerna är just batteriets <strong>spänning</strong> (kort 2).</p>
+
+    <h3>Hur händer det fysiskt?</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Kemiska reaktioner</strong>När du köper ett nytt batteri har det kemikalier inuti som är "redo" att reagera. Reaktionerna ger energi.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Elektroner samlas vid minuspolen</strong>Reaktionerna gör att elektroner samlas vid den ena polen — minuspolen.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Spänning uppstår</strong>Eftersom elektroner samlats på ena sidan och inte på andra finns nu en skillnad — en spänning. Men kretsen är fortfarande öppen, så ingen ström flödar än.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Du sluter kretsen</strong>När du sätter batteriet i en apparat och slår på den sluts kretsen. Nu kan elektronerna ta vägen genom apparaten från minus till plus → ström flödar → apparaten fungerar.</div>
+      </div>
+    </div>
+
+    <h3>Engångs vs. uppladdningsbara</h3>
+    <ul>
+      <li><strong>Engångsbatterier</strong> (t.ex. vanliga AA, AAA): kemikalierna används upp efter en tid. När de är slut kasseras batteriet (lämnas till återvinning).</li>
+      <li><strong>Ackumulatorer</strong> (uppladdningsbara batterier, som i mobilen): kemiska reaktionerna kan <strong>vändas</strong> genom att man laddar batteriet — då återställs kemikalierna.</li>
+    </ul>
+
+    <figure class="figure">
+      <img src="4.png" alt="Batteriets uppbyggnad — kemikalier, poler, urladdat vs nytt">
+      <figcaption>Inuti batteriet skapar kemiska reaktioner ett överskott av elektroner vid minuspolen. När batteriet är urladdat har kemikalierna reagerat klart.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 3.2 Spänning, ström och resistans, s. 45–46.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Tesla Model S har ett batteri med <strong>cirka 7 100 små battericeller</strong> — i grunden samma typ som finns i bärbara datorer, fast paketerade tillsammans.</li>
+        <li>Världens <strong>äldsta kända batteri</strong> är 2 000 år gammalt — "Bagdadbatteriet" från forntida Persien. Forskare är inte säkra på vad det användes till, men det fungerar fortfarande om det fylls med druvjuice.</li>
+        <li>Ett uppladdningsbart litiumjonbatteri tål bara <strong>cirka 500–1 000 laddcykler</strong> innan det börjar tappa kapacitet — det är därför mobiler känns "trötta" efter några år.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k3">← Kort 3: Magnetism</a>
+    <a href="#k5">Nästa: Generator →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 5 ====== -->
+<article class="card" id="k5">
+  <div class="card-header">
+    <div class="card-num">05</div>
+    <div class="card-title">
+      <div class="card-tag">Strömkällor</div>
+      <h2>Hur fungerar en generator?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du står hemma och slår på en lampa. Strömmen kommer från vägguttaget — men hur kom den dit? Den måste skapas någonstans. Det är just det en <strong>generator</strong> gör.</p>
+
+    <h3>Vad gör en generator?</h3>
+    <p><strong>En generator omvandlar rörelse till elektrisk ström.</strong> Den är hela elnätets hjärta — utan generatorer, ingen el i hemmet.</p>
+
+    <h3>Två huvuddelar</h3>
+    <ol>
+      <li><strong>En magnet</strong> — vanlig magnet med nordpol och sydpol (kort 3).</li>
+      <li><strong>En spole</strong> — en lång, isolerad metalltråd lindad <strong>många</strong> varv runt något (säg 600 varv runt en cylinder).</li>
+    </ol>
+
+    <h3>Hur skapas strömmen?</h3>
+    <p>Om du <strong>snurrar magneten</strong> inuti spolen uppstår en elektrisk ström i spolens tråd — utan något batteri.</p>
+
+    <h4>Varför händer detta?</h4>
+    <p>Magneten har ett magnetfält runt sig. När den snurrar <strong>vänder fältet riktning hela tiden</strong>. Det betyder att magnetfältet som går genom spolen <strong>ändras</strong> hela tiden — och det är just denna förändring som får elektronerna i tråden att börja röra sig (= elektrisk ström, kort 1).</p>
+
+    <p>Detta fenomen kallas <strong>induktion</strong> — vi går djupare in i det i kort 11–12.</p>
+
+    <h3>Växelström</h3>
+    <p>Eftersom magneten snurrar runt och runt vänder strömmen riktning hela tiden. Det kallar vi <strong>växelström</strong> — motsats till <strong>likström</strong> från ett batteri (som alltid går åt samma håll).</p>
+
+    <p>Vägguttagets 230 V är just växelström. Den byter riktning <strong>100 gånger per sekund</strong>.</p>
+
+    <h3>Stora generatorer i kraftverken</h3>
+    <p>Generatorerna i kraftverken fungerar på <strong>exakt samma sätt</strong> — bara mycket större. Det enda som skiljer är <strong>vad som driver runt magneten</strong>:</p>
+
+    <ul>
+      <li><strong>Vindkraftverk</strong> — vinden snurrar bladen som driver magneten</li>
+      <li><strong>Vattenkraftverk</strong> — rinnande vatten driver en turbin</li>
+      <li><strong>Kärnkraftverk</strong> — vattenånga från upphettat vatten driver en turbin</li>
+      <li><strong>Cykeldynamo</strong> — du trampar, hjulet snurrar, magneten roteras</li>
+    </ul>
+
+    <div class="figures-stacked">
+      <figure class="figure">
+        <img src="5.png" alt="Generatorns princip i tre steg — magnet roterar, fältet vänder, växelström uppstår">
+        <figcaption>När magneten snurrar ändras fältet i spolen → ström uppstår. Eftersom magneten vänder hela tiden får vi växelström.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="6.png" alt="Vindkraftverk i fyra steg — från vind till el i hemmet">
+        <figcaption>I ett vindkraftverk är vinden energikällan som driver runt magneten. Samma princip i alla kraftverk — bara olika energikälla.</figcaption>
+      </figure>
+    </div>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 231.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Vingarna på ett modernt vindkraftverk kan vara <strong>över 100 meter långa</strong> — längre än en fotbollsplan. Trots det snurrar de bara cirka 15 varv per minut, men det räcker för att försörja 1 500 hushåll med el.</li>
+        <li>Sveriges största vattenkraftverk, <strong>Harsprånget</strong> i Lule älv, har generatorer som tillsammans producerar lika mycket el som en halv miljon villor förbrukar.</li>
+        <li>Generatorprincipen upptäcktes av <strong>Michael Faraday år 1831</strong> — innan dess hade människan i hela sin historia bara haft batterier och statisk elektricitet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k4">← Kort 4: Batteri</a>
+    <a href="#k6">Nästa: Strömförande ledare →</a>
+  </div>
+</article>
+
+<!-- ============== MAGNETISM OCH STRÖM ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 3 · Magnetism &amp; ström</div>
+  <h2>Sambandet mellan elektricitet och magnetism</h2>
+</div>
+
+<!-- ====== KORT 6 ====== -->
+<article class="card" id="k6">
+  <div class="card-header">
+    <div class="card-num">06</div>
+    <div class="card-title">
+      <div class="card-tag">Magnetism &amp; ström</div>
+      <h2>Vad händer runt en strömförande ledare?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Året är 1820. Den danske läraren <strong>Hans Christian Ørsted</strong> står framför sin klass med en kompass och en metalltråd kopplad till ett batteri. När han släpper på strömmen vrider sig plötsligt kompassnålen — av sig själv. Han hade just upptäckt något revolutionerande: <strong>elektricitet och magnetism hänger ihop</strong>.</p>
+
+    <h3>Vad är en ledare?</h3>
+    <p>En <strong>ledare</strong> är ett material som leder elektricitet — oftast en <strong>metalltråd</strong> som koppartråden inuti en sladd. Det är genom ledaren elektronerna kan röra sig fritt (kort 1).</p>
+
+    <h3>Vad händer när det går ström?</h3>
+    <p><strong>Runt en strömförande ledare uppstår ett magnetfält</strong> — i luften omkring tråden, inte i tråden själv.</p>
+
+    <p>Magnetfältet har en speciell form: det är <strong>cirkelformat</strong>. Fältlinjerna går i ringar runt ledaren, som vågringar som breder ut sig från ett finger som doppats i vattnet — fast i staplade lager längs hela trådens längd.</p>
+
+    <h3>Stäng av strömmen → magnetfältet försvinner</h3>
+    <p>Magnetfältet finns <strong>bara</strong> så länge strömmen flödar. Slå av kretsen → inget fält. Slå på igen → fältet är tillbaka.</p>
+
+    <h3>Högerhandsregeln — så hittar du fältets riktning</h3>
+    <p>Magnetfältet har en <strong>riktning</strong> — det "pekar" åt något håll runt tråden. Vilket håll beror på vilken riktning strömmen går.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Ta din högra hand</strong>Det <em>måste</em> vara höger — vänster ger fel svar!</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Peka tummen i strömmens riktning</strong>Tummen = strömmens riktning genom tråden.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Krök fingrarna runt tråden</strong>Som om du greppar tråden.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Fingrarna pekar i fältets riktning</strong>Riktning på fältlinjerna runt tråden = riktningen dina fingrar kröker sig.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Varför inte vänster hand?</div>
+      <p>Vänster hand ger faktiskt <strong>fel svar</strong>. Magnetfältet runt en ledare har en bestämd riktning i naturen — höger hand råkar peka exakt likadant, vänster pekar tvärtom. Det är fysik, inte konvention. (Jämför: nästan alla skruvar är "högergängade" — vrider du medurs skruvar du in.)</p>
+    </div>
+
+    <div class="figures-stacked">
+      <figure class="figure">
+        <img src="7.png" alt="Magnetfält runt en strömförande ledare — Ørsteds upptäckt">
+        <figcaption>När det går ström genom tråden bildas ett cirkulärt magnetfält runt den. Kompassnålen vrider sig — det var Ørsteds upptäckt år 1820.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="8.png" alt="Högerhandsregeln steg för steg">
+        <figcaption>Höger hand med tummen i strömmens riktning → fingrarna kröker sig i fältets riktning.</figcaption>
+      </figure>
+    </div>
+
+    <p class="source">Källa i boken: 9.2 Så fungerar elektromagneter, s. 221–222.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Ørsted gjorde sin upptäckt <strong>helt av en slump</strong> — han skulle visa något helt annat på en föreläsning, men råkade lägga kompassen nära en sladd. Hela elektroteknikens revolution startade där.</li>
+        <li>Inom <strong>10 år efter upptäckten</strong> hade människan byggt sin första elmotor, sin första generator och sin första elektromagnet. En av snabbaste teknikrevolutionerna i historien.</li>
+        <li>Enheten för magnetfältets styrka — <strong>tesla (T)</strong> — är uppkallad efter Nikola Tesla. En MR-kamera har 1,5–3 T, jordens magnetfält är bara 0,00005 T.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k5">← Kort 5: Generator</a>
+    <a href="#k7">Nästa: Elektromagnet →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 7 ====== -->
+<article class="card" id="k7">
+  <div class="card-header">
+    <div class="card-num">07</div>
+    <div class="card-title">
+      <div class="card-tag">Magnetism &amp; ström</div>
+      <h2>Vad är en elektromagnet?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig en magnetkran på ett skrotupplag. En jättelik rund magnet svävar över bilvrak. Föraren trycker på en knapp — <strong>vips</strong> — bilen lyfts. Knapp igen — bilen släpper. Hur kan en magnet bara <em>släppa</em>? En kylskåpsmagnet kan ju aldrig stängas av.</p>
+
+    <p>Svaret: magnetkranen är ingen vanlig magnet. Den är en <strong>elektromagnet</strong>.</p>
+
+    <h3>Vad är en elektromagnet?</h3>
+    <p><strong>En elektromagnet är en magnet som bara fungerar när det går ström genom den.</strong> Slå på strömmen → magnetisk. Stäng av → magnetismen försvinner direkt.</p>
+
+    <p>Den bygger direkt på det vi lärde oss i kort 6: när det går ström genom en ledare uppstår ett magnetfält runt ledaren.</p>
+
+    <h3>Hur byggs en elektromagnet?</h3>
+    <ol>
+      <li><strong>En spole</strong> — en lång isolerad metalltråd lindad många varv. Tänk dig att man rullar tråd hundratals gånger runt en penna och drar ut pennan.</li>
+      <li><strong>En järnkärna</strong> — en bit järn (t.ex. en spik eller stång) inuti spolen. Det är därför man ofta lindar tråden direkt runt en järnspik i fysiksalen.</li>
+    </ol>
+
+    <p>När batteriet kopplas in händer två saker samtidigt:</p>
+    <ul>
+      <li>Strömmen i tråden skapar ett magnetfält runt varje varv av spolen (kort 6)</li>
+      <li>Alla små fält adderas ihop till ett <strong>starkt samlat magnetfält</strong> med tydlig N i ena änden och S i andra</li>
+    </ul>
+
+    <p>Resultat: hela järnstången beter sig som en stavmagnet — fast bara så länge strömmen går.</p>
+
+    <h3>Varför just järn i kärnan?</h3>
+    <p>Som vi lärde oss i kort 3 är järnets atomer "som små magneter". I spolens fält <strong>rätar atomerna upp sig</strong> och pekar åt samma håll → de adderar sin magnetism till spolens → magneten blir mycket starkare än om kärnan vore tom (luft).</p>
+
+    <p>Med rätt järn kan styrkan bli 100–1000 gånger starkare än utan kärna.</p>
+
+    <div class="callout">
+      <div class="callout-title">Viktigt att förstå</div>
+      <p>Strömmen går <strong>bara</strong> genom spolens tråd, <strong>aldrig</strong> genom järnkärnan. Järnkärnan blir magnetisk genom att den ligger i spolens fält — fenomenet kallas <strong>influens</strong>.</p>
+    </div>
+
+    <h3>Vanlig magnet vs. elektromagnet</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Vanlig magnet</th><th>Elektromagnet</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Magnetisk när?</strong></td><td>Alltid</td><td>Bara när strömmen är på</td></tr>
+          <tr><td><strong>Kan stängas av?</strong></td><td>Nej</td><td>Ja — slå av strömmen</td></tr>
+          <tr><td><strong>Styrkan kan ändras?</strong></td><td>Nej</td><td>Ja — ändra strömmen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="figure">
+      <img src="9.png" alt="Elektromagnet — spole runt järnkärna, av/på, vardagsexempel">
+      <figcaption>Spole runt en järnkärna + ström = elektromagnet. Stora fördelen jämfört med vanlig magnet: kan slås av och på.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 9.2 Så fungerar elektromagneter, s. 222–223.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Världens kraftigaste elektromagnet, vid <strong>National High Magnetic Field Laboratory i USA</strong>, kan skapa ett magnetfält 900 000 gånger starkare än jordens — så starkt att det kan få vatten och till och med en levande groda att sväva i luften.</li>
+        <li>Maglev-tåg i <strong>Shanghai</strong> svävar 10 cm över rälsen tack vare elektromagneter och kan komma upp i 460 km/h. Resan från flygplatsen till stan tar bara 8 minuter.</li>
+        <li>I en MR-kamera på sjukhus är elektromagneten så stark att <strong>man måste tömma fickorna</strong> innan man går in — annars flyger nycklar och mynt som projektiler genom rummet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k6">← Kort 6: Strömförande ledare</a>
+    <a href="#k8">Nästa: Starkare elektromagnet →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 8 ====== -->
+<article class="card" id="k8">
+  <div class="card-header">
+    <div class="card-num">08</div>
+    <div class="card-title">
+      <div class="card-tag">Magnetism &amp; ström</div>
+      <h2>Hur kan man göra en elektromagnet starkare?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du i fysiksalen byggt en elektromagnet (kort 7). Den lyfter <em>en</em> gem. Häftigt! Men sen tänker du: hur gör jag den mycket starkare? Tio gem? Hundra? Eller — som magnetkranen — flera ton?</p>
+
+    <p>Det finns <strong>tre saker</strong> du kan ändra. Varje förändring gör magneten starkare. Gör du alla tre samtidigt blir den mycket starkare.</p>
+
+    <h3>1 · Linda fler varv på spolen</h3>
+    <p>Varje varv av spolen skapar sitt eget lilla magnetfält när det går ström (kort 6). Lindar du tråden <strong>10 varv</strong> får du 10 små fält som adderas. Lindar du <strong>100 varv</strong> får du 100 fält som adderas — alltså 10 gånger starkare totalt.</p>
+
+    <p><em>Detta är därför industrimagneter (som magnetkranar) ofta har tusentals varv av tråd lindade runt kärnan.</em></p>
+
+    <h3>2 · Öka strömstyrkan i spolen</h3>
+    <p>Ju fler elektroner per sekund som flödar genom tråden (kort 1), desto <strong>starkare</strong> blir magnetfältet runt varje varv. Dubbla strömmen → ungefär dubbel styrka.</p>
+
+    <p>Strömmen kan ökas på två sätt:</p>
+    <ul>
+      <li>Använd en <strong>kraftigare spänningskälla</strong> (9 V istället för 1,5 V — kort 2)</li>
+      <li>Använd <strong>tjockare tråd</strong> med lägre motstånd</li>
+    </ul>
+
+    <h3>3 · Använd en kärna av mjukt järn</h3>
+    <p>Som vi lärde oss i kort 7 rätar järnets atomer upp sig i spolens fält och adderar sin magnetism. <strong>Med järnkärna kan styrkan bli 100–1 000 gånger starkare</strong> än med tom spole (luft).</p>
+
+    <h4>Varför just <em>mjukt</em> järn?</h4>
+    <p>Mjukt järn blir lätt magnetiskt när det är i ett fält, och <strong>släpper magnetismen lika lätt</strong> när fältet försvinner. Det är precis vad vi vill ha — elektromagneten ska kunna slås av och på snabbt.</p>
+
+    <p>Hårt järn (som stål) skulle <strong>behålla magnetismen</strong> även efter att strömmen stängts av — då fungerar inte av/på-funktionen.</p>
+
+    <figure class="figure">
+      <img src="10.png" alt="Tre faktorer som gör elektromagneten starkare — varv, ström, järn">
+      <figcaption>Tre saker styr elektromagnetens styrka: antal varv, strömstyrka och järnkärna. Industrimagneter använder alla tre i extrem skala.</figcaption>
+    </figure>
+
+    <h3>Sammanfattning</h3>
+    <p>Magnetfältets styrka beror ungefär på <strong>strömstyrkan × antal varv</strong>, multiplicerat med hur bra järnkärnan är. Industrimagneter (magnetkranar, MR-kameror) har alla tre maxade:</p>
+    <ul>
+      <li><strong>Tusentals varv</strong> av tråd</li>
+      <li><strong>Mycket kraftiga strömmar</strong> (hundratals ampere)</li>
+      <li><strong>Stora järnkärnor</strong> av speciellt järn</li>
+    </ul>
+
+    <p class="source">Källa i boken: 9.2 Så fungerar elektromagneter, s. 222.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Världens största industriella magnetkranar kan lyfta <strong>över 30 ton skrot</strong> — så mycket som 25 personbilar — i ett enda lyft.</li>
+        <li>I partikelacceleratorn <strong>LHC</strong> vid CERN i Schweiz används supraledande elektromagneter som måste kylas till −271 °C för att fungera. Magnetfältet där är 100 000 gånger starkare än jordens.</li>
+        <li>Elektromagneten i en högtalare lyfter inget tungt — men den får högtalarens <strong>membran att vibrera</strong> tusentals gånger per sekund. Det är så ljud skapas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k7">← Kort 7: Elektromagnet</a>
+    <a href="#k9">Nästa: Elmotor →</a>
+  </div>
+</article>
+
+<!-- ============== ELMOTOR OCH GENERATOR ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 4 · Elmotor &amp; generator</div>
+  <h2>Hur omvandlas el till rörelse — och tillbaka?</h2>
+</div>
+
+<!-- ====== KORT 9 ====== -->
+<article class="card" id="k9">
+  <div class="card-header">
+    <div class="card-num">09</div>
+    <div class="card-title">
+      <div class="card-tag">Elmotor &amp; generator</div>
+      <h2>Hur fungerar en enkel elmotor?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du tar fram din eltandborste och trycker på knappen. Borstet börjar vibrera och snurra. Eller fläkten på sommaren — bladen snurrar fortare ju högre du sätter hastigheten. Hur kan elektricitet få något att <strong>snurra</strong>?</p>
+
+    <p>Det är en <strong>elmotor</strong> som arbetar inuti.</p>
+
+    <p>En elmotor är motsatsen mot en generator (kort 5):</p>
+    <ul>
+      <li><strong>Generator:</strong> rörelse in → ström ut</li>
+      <li><strong>Elmotor:</strong> ström in → rörelse ut</li>
+    </ul>
+
+    <h3>Hur är en elmotor byggd?</h3>
+    <ol>
+      <li><strong>En spole</strong> — samma slags spole som i kort 5 och 7. När det går ström genom den blir den en <strong>elektromagnet</strong> (kort 7) med N och S i vardera änden.</li>
+      <li><strong>Två fasta magneter</strong> på var sin sida om spolen — vanliga permanenta magneter (kort 3) som alltid är magnetiska.</li>
+      <li><strong>En axel</strong> som spolen sitter på och kan rotera fritt mellan de fasta magneterna.</li>
+    </ol>
+
+    <figure class="figure">
+      <img src="11.png" alt="Elmotorns delar — spole, fasta magneter, axel, kommutator, batteri">
+      <figcaption>Elmotorns viktiga delar: spolen (blir elektromagnet), de fasta magneterna, axeln, och kommutatorn som vänder strömmen.</figcaption>
+    </figure>
+
+    <h3>Hur skapas rörelsen — fyra faser som upprepas</h3>
+    <p>Här utnyttjas reglerna från kort 3: <strong>olika poler attraherar, lika poler repellerar</strong>.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Strömmen slås på</strong>Spolen blir en elektromagnet med N i ena änden och S i den andra. Spolens N hamnar nära den fasta magnetens S. Olika poler attraherar → spolen <strong>dras</strong> mot den fasta magneten och börjar snurra.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Halvvägs</strong>När spolen snurrat ett kvarts varv står den rakt mellan magneterna. <strong>Problem:</strong> om strömmen fortsatte åt samma håll skulle attraktionen nu DRA TILLBAKA spolen baklänges! Lösningen: vänd strömmens riktning precis nu. Det gör <strong>kommutatorn</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Strömmen har vänts</strong>När strömmen byter riktning byter spolens poler plats — det som var N är nu S. Nu finns <strong>lika poler</strong> nära varandra (S mot S). Lika poler repellerar → spolen knuffas BORT, vidare i <strong>samma rotationsriktning</strong> som tidigare.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Kontinuerlig rotation</strong>Faserna 1–3 upprepas <strong>hundratals gånger per sekund</strong>. Strömmen vänder varje halvt varv, polerna vänder med, spolen drivs alltid framåt. Resultat: jämn, snabb rotation.</div>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <img src="12.png" alt="Elmotorns fyra faser steg för steg">
+      <figcaption>Kommutatorn vänder strömmens riktning vid rätt ögonblick → spolen knuffas alltid framåt i samma riktning.</figcaption>
+    </figure>
+
+    <h3>Vad är kommutatorn?</h3>
+    <p><strong>Kommutatorn är en del på spolens axel som vänder strömmens riktning automatiskt varje halvt varv.</strong> Utan den skulle spolen bara pendla en gång och fastna — den skulle aldrig snurra runt. Kommutatorn är hela hemligheten bakom hur en elmotor kan rotera kontinuerligt.</p>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 228–229.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>En modern <strong>elbils elmotor har bara cirka 20 rörliga delar</strong>. En bensinmotor har över 2 000. Det är därför elbilar har mycket mindre service och slits långsammare.</li>
+        <li>En vanlig <strong>drönare</strong> har fyra elmotorer som snurrar 20 000 varv per minut — så snabbt att propellrarna verkar stå stilla.</li>
+        <li>I ett genomsnittligt hem finns det <strong>50–100 elmotorer</strong> — i kylskåpet, fläktar, hårtorkar, eltandborstar, leksaksbilar, datorers fläktar, mikrovågsugn, ja till och med i klockan på väggen.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k8">← Kort 8: Starkare elektromagnet</a>
+    <a href="#k10">Nästa: Motor vs generator →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 10 ====== -->
+<article class="card" id="k10">
+  <div class="card-header">
+    <div class="card-num">10</div>
+    <div class="card-title">
+      <div class="card-tag">Elmotor &amp; generator</div>
+      <h2>Vad är skillnaden mellan elmotor och generator?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig en elbil. När föraren trampar gas — bilen accelererar. Men när föraren <strong>bromsar</strong> händer något oväntat: <strong>bilens batteri laddas upp</strong>! Hur då?</p>
+
+    <p>Svaret: samma maskin som driver bilen kan också <strong>fungera baklänges</strong> som en generator. När bilen bromsar omvandlas hjulens rörelse till elektricitet som matas tillbaka till batteriet. Detta kallas <strong>regenerativ bromsning</strong>.</p>
+
+    <p>Det här visar något viktigt: <strong>elmotor och generator är samma sorts maskin</strong> — bara med olika riktning på energiflödet.</p>
+
+    <h3>Två maskiner — samma princip, motsatta riktningar</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Elmotor</th><th>Generator</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tar emot</strong></td><td>Elektrisk ström</td><td>Rörelse</td></tr>
+          <tr><td><strong>Ger</strong></td><td>Rörelse</td><td>Elektrisk ström</td></tr>
+          <tr><td><strong>Riktning</strong></td><td>Ström → rörelse</td><td>Rörelse → ström</td></tr>
+          <tr><td><strong>Exempel</strong></td><td>Elvisp, fläkt, eltandborste, elbil (kort 9)</td><td>Vattenkraftverk, vindkraftverk, cykeldynamo (kort 5)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Hur kan det vara samma maskin?</h3>
+    <p>Mekaniskt är en elmotor och en generator nästan identiska. Båda består av:</p>
+    <ul>
+      <li>En <strong>spole</strong></li>
+      <li><strong>Magneter</strong> som rör sig i förhållande till spolen</li>
+      <li>En <strong>axel</strong></li>
+    </ul>
+
+    <p>Skillnaden är bara <strong>vad du matar in</strong> och <strong>vad du får ut</strong>:</p>
+    <ul>
+      <li><strong>Elmotor:</strong> Ström in → spolen blir elektromagnet → magneterna drar runt den → rörelse ut</li>
+      <li><strong>Generator:</strong> Rörelse in → magnetfältet ändras i spolen → ström ut</li>
+    </ul>
+
+    <p>Båda bygger på sambandet mellan ström och magnetfält som vi lärde oss i kort 6 — det är hela hemligheten.</p>
+
+    <h3>Praktiska exempel — samma maskin gör båda</h3>
+    <ul>
+      <li><strong>Elbilar</strong> — elmotor när bilen accelererar, generator när bilen bromsar</li>
+      <li><strong>Tåg och tunnelbana</strong> — bromsenergin matas tillbaka in i elnätet</li>
+      <li><strong>Elcyklar</strong> — motorn driver hjulet uppför, kan ladda batteriet vid bromsning nedför</li>
+    </ul>
+
+    <figure class="figure">
+      <img src="13.png" alt="Elmotor vs generator — samma maskin, olika riktning">
+      <figcaption>Samma mekaniska konstruktion. Elmotor: ström in → rörelse ut. Generator: rörelse in → ström ut.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 228–231.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>En <strong>Tesla återvinner upp till 70 %</strong> av bromsenergin och matar tillbaka till batteriet. Det är därför elbilar förbrukar mindre energi i stadstrafik än på motorvägen — tvärtom mot bensinbilar.</li>
+        <li>Stockholms <strong>tunnelbanetåg matar tillbaka el</strong> till nätet när de bromsar in vid stationerna. Energin används direkt av andra tåg som accelererar i närheten.</li>
+        <li>Världens första elbil byggdes redan <strong>1884</strong> — alltså tre år före den första bensinbilen. Men elbilarna förlorade racet på 1900-talet eftersom batterierna inte räckte långt nog.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k9">← Kort 9: Elmotor</a>
+    <a href="#k11">Nästa: Induktion →</a>
+  </div>
+</article>
+
+<!-- ============== INDUKTION ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 5 · Induktion</div>
+  <h2>När magnetfält skapar ström</h2>
+</div>
+
+<!-- ====== KORT 11 ====== -->
+<article class="card" id="k11">
+  <div class="card-header">
+    <div class="card-num">11</div>
+    <div class="card-title">
+      <div class="card-tag">Induktion</div>
+      <h2>Vad menas med elektromagnetisk induktion?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du lägger din mobiltelefon på en trådlös laddare. Telefonen och laddaren rör inte ens varandra elektriskt — det finns ingen sladd som går in i telefonen. Ändå laddas batteriet. Hur kan ström överföras genom <em>luften</em>?</p>
+
+    <p>Eller tänk dig en <strong>induktionsspis</strong>: du sätter en kastrull på plattan och vatten kokar på en minut — men plattan blir aldrig särskilt varm. Det är kastrullen som hettas upp. Hur då?</p>
+
+    <p>Båda fenomenen bygger på samma sak: <strong>elektromagnetisk induktion</strong>.</p>
+
+    <h3>Vad är induktion?</h3>
+    <p>I kort 6 lärde vi oss att en elektrisk ström skapar ett magnetfält. Induktion är <strong>motsatsen</strong>:</p>
+
+    <p><strong>Ett magnetfält som förändras skapar en elektrisk ström i en närliggande ledare eller spole.</strong></p>
+
+    <div class="callout">
+      <div class="callout-title">Det viktigaste ordet</div>
+      <p>Det viktiga ordet är <strong>förändras</strong>. Det räcker inte att magnetfältet bara <em>finns</em> — det måste <em>ändra sig</em> över tid för att ström ska uppstå.</p>
+    </div>
+
+    <h3>Förändringen kan ske på flera sätt</h3>
+    <ul>
+      <li>En magnet <strong>förs in</strong> i en spole</li>
+      <li>En magnet <strong>dras ut</strong> ur en spole</li>
+      <li>En magnet <strong>roterar</strong> framför en spole (som i en generator, kort 5)</li>
+    </ul>
+
+    <h3>Det klassiska experimentet</h3>
+    <p>Det enklaste sättet att se induktion är att koppla en spole till en amperemeter (mätare som visar ström) och föra en stavmagnet in och ut ur spolen:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Magnet förs in</strong>Amperemetern slår utslag → ström uppstår.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Magnet hålls stilla i spolen</strong>Amperemetern visar noll → <em>ingen</em> ström, trots att magnetfältet finns där.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Magnet dras ut</strong>Amperemetern slår utslag igen — men åt motsatt håll → ström i motsatt riktning.</div>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <img src="14.png" alt="Klassiska induktionsexperimentet — magnet in, stilla, ut">
+      <figcaption>Bara när magneten <em>rör sig</em> uppstår ström. Stilla magnet → ingen ström, även om fältet finns.</figcaption>
+    </figure>
+
+    <p><em>Hur strömmen uppstår fysiskt går vi igenom i kort 12.</em></p>
+
+    <h3>Vem upptäckte induktion?</h3>
+    <p>Engelsmannen <strong>Michael Faraday</strong> upptäckte fenomenet på <strong>1830-talet</strong>, ungefär tio år efter Ørsted (kort 6) visat att elektricitet kan skapa magnetism. Faraday visade det omvända — och därmed lade han grunden för all modern elproduktion.</p>
+
+    <h3>Var används induktion i vardagen?</h3>
+    <ul>
+      <li><strong>Generatorer i kraftverk</strong> (kort 5) — magneten roterar, fält ändras, ström uppstår</li>
+      <li><strong>Trådlösa laddare</strong> — en spole skapar ändrande fält som inducerar ström i mobilens spole</li>
+      <li><strong>Induktionsspisar</strong> — fält inducerar ström i kastrullen, som blir varm</li>
+      <li><strong>Transformatorer</strong> i elnätet (kort 13–15)</li>
+      <li><strong>Cykeldynamo</strong> — magnet snurrar med hjulet, ström driver lampan</li>
+      <li><strong>MR-kameror</strong> på sjukhus</li>
+    </ul>
+
+    <p>Utan Faradays upptäckt skulle vi inte ha någon av dessa apparater.</p>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 230.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>När du går genom <strong>säkerhetskontrollen på flygplatsen</strong> skapar metalldetektorn ett snabbt växlande magnetfält. Om du har metall på dig induceras en ström i den, som ger pip i detektorn — induktion i praktiken.</li>
+        <li>Faraday var <strong>autodidakt</strong> — växte upp fattig som bokbindarlärling och hade nästan ingen formell utbildning. Ändå räknas han som en av historiens största fysiker, jämte Newton och Einstein.</li>
+        <li>En <strong>induktionsspis</strong> är 90 % effektiv — bara 10 % energi går till spillo. En vanlig keramikhäll är bara 70 %, en gasspis runt 40 %.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k10">← Kort 10: Motor vs generator</a>
+    <a href="#k12">Nästa: Hur ström uppstår →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 12 ====== -->
+<article class="card" id="k12">
+  <div class="card-header">
+    <div class="card-num">12</div>
+    <div class="card-title">
+      <div class="card-tag">Induktion</div>
+      <h2>Hur uppstår ström genom induktion?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig en cykel med dynamo. När du trampar långsamt lyser cykellampan svagt. Trampar du fort lyser den starkt. Vad är det som händer? Och varför just <em>snabbare</em> tramp?</p>
+
+    <p>I kort 11 lärde vi oss att induktion är när ett ändrande magnetfält skapar ström. Nu tar vi nästa steg: <strong>hur uppstår strömmen, och vad bestämmer hur stark den blir?</strong></p>
+
+    <h3>Hur uppstår strömmen?</h3>
+    <p>Inuti dynamon finns en spole och en magnet (kort 5). När hjulet snurrar rör sig magneten i förhållande till spolen → magnetfältet inuti spolen <strong>ändras hela tiden</strong>.</p>
+
+    <p>När magnetfältet ändras påverkar det elektronerna i spolens koppartråd så att de <strong>börjar röra sig genom tråden</strong>. Och elektroner som rör sig i en tråd är just vad vi kallar elektrisk ström (kort 1).</p>
+
+    <div class="callout">
+      <div class="callout-title">Hela kedjan</div>
+      <p><strong>Rörelse → magnetfält ändras inne i spolen → elektroner sätts i rörelse → ström uppstår</strong></p>
+    </div>
+
+    <h3>Vad bestämmer hur stark strömmen blir?</h3>
+    <p>Tre saker påverkar styrkan på induktionsströmmen:</p>
+
+    <h4>1 · Hur snabbt magnetfältet ändras</h4>
+    <p>Ju snabbare magneten rör sig, desto fortare ändras fältet, desto <strong>starkare</strong> ström. Det är därför cykellampan lyser starkare när du trampar fort — magneten i dynamon snurrar snabbare.</p>
+
+    <h4>2 · Antal varv på spolen</h4>
+    <p>Varje varv bidrar med sin del. En spole med 100 varv ger ungefär 10 gånger starkare ström än en spole med 10 varv (vid samma rörelse). Samma princip som med elektromagneter (kort 8) — fler varv = starkare effekt.</p>
+
+    <h4>3 · Magnetens styrka</h4>
+    <p>En starkare magnet skapar ett starkare fält. När det fältet ändras blir förändringen större → starkare ström.</p>
+
+    <h3>Strömmens riktning beror på rörelsens riktning</h3>
+    <p>När magneten <strong>förs in</strong> i spolen går strömmen åt ett håll. När magneten <strong>dras ut</strong> går strömmen åt <strong>motsatt håll</strong>. Detta är just det som gör att en generator producerar <strong>växelström</strong> (kort 5) — när magneten roterar går fältet hela tiden "in" och "ut" genom spolen, och strömmen byter därför riktning hela tiden.</p>
+
+    <figure class="figure">
+      <img src="15.png" alt="Induktionsström — hur den uppstår och vad som påverkar styrkan">
+      <figcaption>Mekanismen: rörelse → fält ändras → elektroner rör sig → ström. Tre faktorer styr styrkan: hastighet, antal varv, magnetstyrka.</figcaption>
+    </figure>
+
+    <h3>Var ser man detta i vardagen?</h3>
+    <ul>
+      <li><strong>Cykeldynamo</strong> — trampar du snabbare lyser lampan starkare (faktor 1)</li>
+      <li><strong>Stora generatorer</strong> i kraftverk har spolar med tusentals varv (faktor 2)</li>
+      <li><strong>MR-kameror</strong> använder mycket starka magneter (faktor 3)</li>
+      <li><strong>Trådlösa laddare</strong> — mobilens inre spole har många varv för effektiv laddning</li>
+    </ul>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 230.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Generatorerna i <strong>Vattenfalls största vattenkraftverk Harsprånget</strong> har spolar med tusentals varv av koppartråd — om man rätade ut tråden i en enda generator skulle den nå runt halva jordklotet.</li>
+        <li>Faraday upptäckte induktion <strong>utan att kunna någon matematik</strong> — han förklarade allt med hjälp av "kraftlinjer" som han ritade. Maxwell omvandlade hans idéer till matematik 30 år senare.</li>
+        <li>Den första <strong>induktionsspisen</strong> såldes i USA redan 1973, men slog igenom i Europa först på 2000-talet eftersom kastrullerna måste ha magnetisk botten — vilket alla kastruller inte hade då.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k11">← Kort 11: Induktion</a>
+    <a href="#k13">Nästa: Transformator →</a>
+  </div>
+</article>
+
+<!-- ============== TRANSFORMATOR ============== -->
+<div class="section-divider">
+  <div class="section-tag">Del 6 · Transformator</div>
+  <h2>Hur höjs och sänks elektrisk spänning?</h2>
+</div>
+
+<!-- ====== KORT 13 ====== -->
+<article class="card" id="k13">
+  <div class="card-header">
+    <div class="card-num">13</div>
+    <div class="card-title">
+      <div class="card-tag">Transformator</div>
+      <h2>Vad gör en transformator?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du ska ladda mobiltelefonen. Du tar fram laddaren och ser att den har en liten <strong>plastdosa</strong> vid kontakten. Varför då? Varför kan vi inte bara koppla en sladd direkt från vägguttaget till mobilen?</p>
+
+    <p>Svaret är att de har <strong>väldigt olika spänning</strong>:</p>
+    <ul>
+      <li>Vägguttaget ger <strong>230 V</strong></li>
+      <li>Mobilens batteri klarar bara <strong>cirka 5 V</strong></li>
+    </ul>
+
+    <p>Om du kopplade vägguttaget direkt till mobilen skulle batteriet förstöras på en sekund. Plastdosan har ett livsviktigt jobb: den <strong>sänker</strong> spänningen från 230 V till ungefär 5 V. Det som sitter inne i plastdosan kallas en <strong>transformator</strong>.</p>
+
+    <h3>Vad gör en transformator?</h3>
+    <p><strong>En transformator höjer eller sänker elektrisk spänning.</strong> Den har två möjliga funktioner:</p>
+    <ul>
+      <li><strong>Transformera ner</strong> — gör hög spänning till lägre</li>
+      <li><strong>Transformera upp</strong> — gör låg spänning till högre</li>
+    </ul>
+
+    <h3>Var används transformatorer?</h3>
+
+    <h4>Mobilladdare och andra laddare</h4>
+    <p>Sänker 230 V till låg spänning som elektroniken klarar (5 V för USB, 12 V för bärbara datorer, osv).</p>
+
+    <h4>Elnätet — i båda riktningar</h4>
+    <ul>
+      <li>Vid kraftverket <strong>höjs spänningen</strong> till cirka <strong>400 000 V</strong> innan strömmen skickas iväg i de långa kraftledningarna. Vid hög spänning förloras mindre energi i ledningarna under transporten.</li>
+      <li>När strömmen kommer fram till bostadsområdet <strong>sänks spänningen</strong> ner till 230 V — det vi har i vägguttagen.</li>
+    </ul>
+
+    <h4>Industri och sjukhus</h4>
+    <p>Många apparater behöver speciella spänningar — svetsutrustning, MR-kameror, röntgen. Transformatorer ställer om till rätt nivå.</p>
+
+    <figure class="figure">
+      <img src="16.png" alt="Transformator — mobilladdare och elnätet, ner och upp">
+      <figcaption>Mobilladdarens plastdosa innehåller en transformator som sänker 230 V till 5 V. I elnätet höjs och sänks spänningen i flera steg.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <div class="callout-title">Viktigt: bara växelström fungerar</div>
+      <p>En transformator fungerar genom <strong>induktion</strong> (kort 11–12) — magnetfältet inuti den måste ändras hela tiden. Det kräver <strong>växelström</strong>, inte likström. Med likström från ett batteri skulle fältet vara konstant → ingen induktion → transformatorn skulle inte göra något alls.</p>
+    </div>
+
+    <p><em>Hur transformatorn är byggd och hur den faktiskt höjer/sänker spänningen går vi igenom i kort 14–15.</em></p>
+
+    <p class="source">Källa i boken: 9.4 Transformatorn, s. 234–235.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Sveriges största transformatorer i elnätet kan väga <strong>över 400 ton</strong> styck — så tunga att de måste transporteras på speciella tåg eftersom inga lastbilar klarar dem.</li>
+        <li>Transformatorerna i ditt grannskap brummar ofta lågt med en ton på <strong>100 Hz</strong>. Det är just dubbla nätfrekvensen (50 Hz × 2) — magnetfältet drar i järnkärnan dubbelt så ofta som strömmen växlar.</li>
+        <li>Det svenska företaget <strong>Hitachi ABB</strong> (tidigare ASEA, sedan ABB) i Ludvika och Västerås är världsledande på just transformatorer — de tillverkar utrustning till elnät i över 100 länder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k12">← Kort 12: Induktionsström</a>
+    <a href="#k14">Nästa: Primär &amp; sekundär →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 14 ====== -->
+<article class="card" id="k14">
+  <div class="card-header">
+    <div class="card-num">14</div>
+    <div class="card-title">
+      <div class="card-tag">Transformator</div>
+      <h2>Vad är primär- och sekundärspole?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att vi öppnar plastdosan på mobilladdaren från kort 13. Vad finns där inne? Hur är en transformator faktiskt byggd?</p>
+
+    <h3>Tre delar inuti</h3>
+    <ol>
+      <li><strong>Två spolar</strong> av lindad koppartråd (kort 5, 7)</li>
+      <li><strong>En järnkärna</strong> som båda spolarna sitter runt — typiskt formad som en rektangulär ram</li>
+      <li><strong>Ledningar</strong> som kopplar varje spole till sin egen krets</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">Det smarta</div>
+      <p>De två spolarna är <strong>inte ihopkopplade</strong> med varandra. De sitter på samma järnkärna, men är helt åtskilda elektriskt — de ingår i <strong>varsin krets</strong>.</p>
+    </div>
+
+    <h3>Vad är de två spolarna?</h3>
+    <ul>
+      <li><strong>Primärspolen</strong> — kopplas till <strong>spänningskällan</strong> (matar in ström). I mobilladdaren: spole kopplad till vägguttaget (230 V).</li>
+      <li><strong>Sekundärspolen</strong> — kopplas till <strong>apparaten</strong> (där den nya spänningen kommer ut). I mobilladdaren: spole kopplad vidare till mobilen (5 V).</li>
+    </ul>
+
+    <p><strong>Minnesregel:</strong> <em>prim</em>ärspolen får först strömmen. <em>Sekund</em>ärspolen kommer i andra hand och tar emot.</p>
+
+    <h3>Hur "hoppar" energin över utan att spolarna rör varandra?</h3>
+    <p>Det här är hela tricket: spolarna är inte ihopkopplade elektriskt, men de är ihopkopplade <strong>magnetiskt</strong> via järnkärnan.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Växelström i primärspolen</strong>När växelström flödar genom primärspolen blir den en elektromagnet (kort 7). Eftersom det är växelström vänder magnetfältet riktning hela tiden.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Magnetfältet leds genom järnkärnan</strong>Järnkärnan fungerar som en "väg" för magnetfältet — fältet leds koncentrerat genom järnet istället för att spridas i luften.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Induktion i sekundärspolen</strong>Inne i sekundärspolen ändras magnetfältet hela tiden → induktion (kort 11–12) → ny ström uppstår och flödar ut till apparaten.</div>
+      </div>
+    </div>
+
+    <p>Resultat: ström överförs från primärsida till sekundärsida utan att de är ihopkopplade. Det är hela transformatorns trick.</p>
+
+    <div class="callout">
+      <div class="callout-title">Ingen ström går genom järnkärnan</div>
+      <p>Strömmen går bara genom <strong>spolarnas tråd</strong>, aldrig genom järnet. Järnkärnans uppgift är bara att leda magnetfältet effektivt mellan primär- och sekundärspolen — som en "magnetledare". Samma princip som elektromagnetens järnkärna i kort 7.</p>
+    </div>
+
+    <h3>Krav: växelström</h3>
+    <p>Som vi sa i kort 13 fungerar transformatorn bara med växelström. Det är just därför primärspolens magnetfält måste ändras hela tiden — annars uppstår ingen induktion i sekundärspolen.</p>
+
+    <p><em>Hur primärspolen och sekundärspolen kan ha olika antal varv för att höja eller sänka spänningen går vi igenom i kort 15.</em></p>
+
+    <figure class="figure">
+      <img src="17.png" alt="Transformatorns konstruktion — primärspole, sekundärspole, järnkärna">
+      <figcaption>Transformatorn består av två spolar på en gemensam järnkärna. Spolarna rör inte varandra elektriskt — energin går via magnetfältet i järnet.</figcaption>
+    </figure>
+
+    <p class="source">Källa i boken: 9.4 Transformatorn, s. 234.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Modern <strong>USB-C-laddning</strong> vid 100 W är en av de tekniskt mest avancerade transformatorerna — den växlar magnetfältet 100 000 gånger per sekund (jämfört med vägguttagets 100). Därför kan dosan vara så liten.</li>
+        <li>Den <strong>första kommersiella transformatorn</strong> visades upp 1885 av tre ungerska ingenjörer. Innan dess hade man bara likströmsnät — och de fungerade så dåligt att Manhattan i New York hade ett kraftverk per kvarter.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k13">← Kort 13: Transformator</a>
+    <a href="#k15">Nästa: Varv &amp; spänning →</a>
+  </div>
+</article>
+
+<!-- ====== KORT 15 ====== -->
+<article class="card" id="k15">
+  <div class="card-header">
+    <div class="card-num">15</div>
+    <div class="card-title">
+      <div class="card-tag">Transformator</div>
+      <h2>Hur påverkas spänningen av antalet varv?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig mobilladdaren igen (kort 13–14). Vägguttaget ger 230 V, men mobilen ska bara ha 5 V. Vi vet nu att inuti laddaren sitter en transformator med en primärspole och en sekundärspole på samma järnkärna. Men hur "vet" transformatorn att den ska sänka spänningen <em>just</em> till 5 V — och inte till någon annan spänning?</p>
+
+    <p>Svaret ligger i <strong>hur många varv</strong> tråden är lindad runt järnkärnan på vardera sidan.</p>
+
+    <h3>Sambandet — antalet varv styr spänningen</h3>
+    <p>Spänningen i en spole är <strong>direkt proportionell mot antalet varv</strong>:</p>
+    <ul>
+      <li>Dubbla antalet varv → <strong>dubbel</strong> spänning</li>
+      <li>Halvera antalet varv → <strong>halv</strong> spänning</li>
+    </ul>
+
+    <h3>Tre möjliga fall</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Förhållande</th><th>Vad händer med spänningen?</th><th>Funktion</th></tr></thead>
+        <tbody>
+          <tr><td>Sekundär har <strong>fler</strong> varv än primär</td><td>Spänningen <strong>höjs</strong></td><td>Transformera upp</td></tr>
+          <tr><td>Sekundär har <strong>färre</strong> varv än primär</td><td>Spänningen <strong>sänks</strong></td><td>Transformera ner</td></tr>
+          <tr><td>Båda har <strong>lika många</strong> varv</td><td>Oförändrad spänning</td><td>Ingen ändring</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Räkneformel</h3>
+    <p>För att räkna ut spänningen kan vi använda regeln:</p>
+
+    <div class="formula">U₁ / U₂ = N₁ / N₂</div>
+
+    <p>där <strong>U</strong> är spänningen och <strong>N</strong> är antalet varv. Index 1 = primär, index 2 = sekundär.</p>
+
+    <p>I ord: <strong>förhållandet mellan spänningarna är samma som förhållandet mellan antalet varv.</strong></p>
+
+    <h3>Räkneexempel från boken</h3>
+    <p>En primärspole har <strong>600 varv</strong> och kopplas till <strong>24 V</strong> växelspänning.</p>
+    <ul>
+      <li>Sekundär med <strong>300 varv</strong> (hälften) → spänning blir <strong>12 V</strong> (halverad)</li>
+      <li>Sekundär med <strong>600 varv</strong> (lika många) → spänning blir <strong>24 V</strong> (oförändrad)</li>
+      <li>Sekundär med <strong>1 200 varv</strong> (dubbelt) → spänning blir <strong>48 V</strong> (dubblerad)</li>
+    </ul>
+
+    <h3>Tillbaka till mobilladdaren</h3>
+    <p>Om mobilladdaren ska sänka 230 V till 5 V måste sekundärspolen ha mycket färre varv. Förhållandet är 230/5 = 46. Om primärspolen har t.ex. <strong>4 600 varv</strong>, behöver sekundärspolen ha <strong>100 varv</strong>.</p>
+
+    <h3>Tillbaka till elnätet (kort 13)</h3>
+    <p>Vid kraftverket transformeras spänningen <em>upp</em> från 10 000 V till 400 000 V — alltså 40 gånger mer. Det betyder att sekundärspolen vid den transformatorn har 40 gånger fler varv än primärspolen.</p>
+
+    <p class="source">Källa i boken: 9.4 Transformatorn, s. 234.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>I de allra största transformatorerna i kraftverken kan en spole bestå av <strong>flera kilometer koppartråd</strong> — så mycket att den måste lindas av specialmaskiner.</li>
+        <li>Sambandet mellan varv och spänning är så exakt att man kan <strong>räkna ut spänningen i förväg</strong> innan transformatorn ens är byggd. Det är därför ABB kan beställa skräddarsydda transformatorer till kunder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k14">← Kort 14: Primär &amp; sekundär</a>
+    <a href="#t1">Nästa: Fördjupning T1 →</a>
+  </div>
+</article>
+
+<!-- ============== TRICKY ============== -->
+<div class="tricky-section-header">
+  <div class="section-tag" style="color: var(--tricky-border);">Del 7 · Fördjupning</div>
+  <h2>Tricky-frågor som <em>ofta dyker upp</em> på prov</h2>
+  <p>Dessa frågor testar förståelse på högre nivå — vanliga för elever som siktar på högsta betyg.</p>
+</div>
+
+<!-- ====== T1 ====== -->
+<article class="card tricky" id="t1">
+  <div class="card-header">
+    <div class="card-num">T1</div>
+    <div class="card-title">
+      <div class="card-tag">Fördjupning</div>
+      <h2>Varför fungerar en transformator med växelström men inte med likström?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du tar en mobilladdare och kopplar bort den från vägguttaget. Istället ansluter du ett 9 V-batteri till laddarens primärsida. Skulle mobilen ladda? Svaret är <strong>nej</strong> — ingenting händer.</p>
+
+    <p>Varför? Det handlar om vad transformatorn behöver för att fungera.</p>
+
+    <h3>Hela poängen är förändring</h3>
+    <p>I kort 14 lärde vi oss att transformatorn fungerar genom <strong>induktion</strong>:</p>
+
+    <div class="callout">
+      <div class="callout-title">Hela kedjan</div>
+      <p>Primärspolens magnetfält ändras → magnetfältet i järnkärnan ändras → induktionsström uppstår i sekundärspolen.</p>
+    </div>
+
+    <p><strong>Förändringen</strong> av magnetfältet är hela poängen.</p>
+
+    <h3>Växelström vs likström</h3>
+    <ul>
+      <li><strong>Växelström</strong> (från vägguttaget) byter riktning 100 gånger per sekund. Magnetfältet i järnkärnan ändras därför hela tiden → induktion → ström i sekundärspolen ✓</li>
+      <li><strong>Likström</strong> (från batteri) går alltid åt samma håll. Magnetfältet blir <strong>konstant</strong> — det ändras inte. Inget förändras → ingen induktion → ingen ström ✗</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Slutsats</div>
+      <p>Transformatorer kräver att magnetfältet förändras, och det kräver i sin tur växelström. Det är därför mobilladdare måste kopplas till vägguttaget och inte till ett batteri.</p>
+    </div>
+
+    <p class="source">Källa i boken: 9.4 Transformatorn, s. 234.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li><strong>Strömkriget på 1880-talet</strong> mellan Edison (likström) och Tesla (växelström) blev en av de mest dramatiska teknikkonflikterna i historien. Tesla vann — just tack vare transformatorn.</li>
+        <li>Det finns ändå moderna <strong>likströmsnät</strong> — för att skicka el över tusentals kilometer (t.ex. mellan kontinenter via undervattenskablar). Då används speciella elektroniska "transformatorer" som arbetar runt likström.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#k15">← Kort 15: Varv &amp; spänning</a>
+    <a href="#t2">Nästa: T2 Kraftledningar →</a>
+  </div>
+</article>
+
+<!-- ====== T2 ====== -->
+<article class="card tricky" id="t2">
+  <div class="card-header">
+    <div class="card-num">T2</div>
+    <div class="card-title">
+      <div class="card-tag">Fördjupning</div>
+      <h2>Varför transformerar man upp spänningen i kraftledningar?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig en mycket lång förlängningssladd — säg 100 meter — där du kopplar en lampa i andra änden. När du tänder lampan ser du att den lyser <strong>svagare</strong> än om du hade kopplat den direkt till vägguttaget. Var blev resten av elen av?</p>
+
+    <p>Svaret: en del av energin gick förlorad som <strong>värme i sladden</strong> under transporten. Sladden själv blev lite varm. Det är samma fenomen som händer på riktigt stora kraftledningar — bara mycket större skala.</p>
+
+    <h3>Värmeförlusten beror på strömstyrkan</h3>
+    <p>Ju starkare ström som flödar genom en ledning, desto <strong>varmare</strong> blir den — och desto mer energi går förlorad som värme. Det är en grundläggande egenskap hos elektriska ledare.</p>
+
+    <h3>Tricket: hög spänning ger låg ström</h3>
+    <p>Här kommer den smarta delen: <strong>samma effekt</strong> (energi per sekund) kan transporteras med antingen:</p>
+    <ul>
+      <li><strong>Låg spänning + hög ström</strong> → mycket värmeförlust</li>
+      <li><strong>Hög spänning + låg ström</strong> → lite värmeförlust</li>
+    </ul>
+
+    <p>Genom att transformera upp spänningen från ca 10 000 V (vid kraftverket) till <strong>400 000 V</strong> innan strömmen skickas iväg, sänks strömstyrkan kraftigt. Resultat: ledningarna blir bara svagt varma, och nästan all energi når fram till bostäderna.</p>
+
+    <p>Vid bostadsområdet <strong>transformeras spänningen ner igen</strong> till 230 V (säkert för hushåll).</p>
+
+    <div class="callout">
+      <div class="callout-title">Slutsats</div>
+      <p>Vi transformerar upp för att <strong>minska strömstyrkan</strong> under transport, vilket minskar värmeförluster i kraftledningarna.</p>
+    </div>
+
+    <p class="source">Källa i boken: 9.4 Transformatorn, s. 235.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Sveriges <strong>stamnät</strong> (de jättestora pylonerna i landskapet) går på 400 000 V — en av de högsta spänningsnivåerna i världen. USA:s motsvarighet är "bara" 345 000 V.</li>
+        <li>Trots upptransformeringen försvinner cirka <strong>5–10 % av all elenergi</strong> som värme i ledningarna i Sverige varje år. Det är ändå mycket bättre än lågspänningsnät, som skulle förlora över 50 %.</li>
+        <li>Om du står under en högspänningsledning en regnig dag kan du ibland höra ett <strong>svagt knäppande ljud</strong> — det är luften som joniseras runt kablarna av den höga spänningen.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#t1">← T1: Transformator + likström</a>
+    <a href="#t3">Nästa: T3 DC vs AC →</a>
+  </div>
+</article>
+
+<!-- ====== T3 ====== -->
+<article class="card tricky" id="t3">
+  <div class="card-header">
+    <div class="card-num">T3</div>
+    <div class="card-title">
+      <div class="card-tag">Fördjupning</div>
+      <h2>Vad är skillnaden mellan likström och växelström?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig två olika strömkällor i ditt hem:</p>
+    <ul>
+      <li><strong>AA-batteri</strong> i fjärrkontrollen — strömmen går alltid från pluspol till minuspol, åt samma håll, hela tiden</li>
+      <li><strong>Vägguttag</strong> där du kopplar in lampan — strömmen där byter riktning 100 gånger per sekund (snabbare än ögat hinner se)</li>
+    </ul>
+
+    <p>Det är två olika sorters ström: <strong>likström</strong> och <strong>växelström</strong>.</p>
+
+    <h3>Likström (DC — Direct Current)</h3>
+    <ul>
+      <li>Går alltid åt <strong>samma håll</strong> i kretsen</li>
+      <li>Spänningen är <strong>konstant</strong> över tid (en flat linje på en graf)</li>
+      <li><strong>Kommer från:</strong> batterier, solceller, USB-laddare</li>
+      <li><strong>Driver:</strong> mobiltelefoner, laptops, leksaker — allt elektroniskt med inbyggt batteri</li>
+    </ul>
+
+    <h3>Växelström (AC — Alternating Current)</h3>
+    <ul>
+      <li>Byter <strong>riktning hela tiden</strong>, fram och tillbaka</li>
+      <li>I Sverige byter den riktning <strong>100 gånger per sekund</strong> (frekvens 50 Hz — 50 hela cykler per sekund, 2 byten per cykel)</li>
+      <li>Spänningen pendlar mellan +230 V och −230 V</li>
+      <li><strong>Kommer från:</strong> vägguttag, generatorer i kraftverk, vindkraftverk (kort 5)</li>
+      <li><strong>Driver:</strong> stora apparater hemma (kyl, tvättmaskin, ugn) och hela elnätet</li>
+    </ul>
+
+    <h3>Varför växelström i elnätet?</h3>
+    <p>Som vi lärde oss i T2 sparas mycket energi om man kan transformera upp spänningen för långdistanstransport. Och transformatorer (kort 13–14) <strong>fungerar bara med växelström</strong> (T1). Det är därför hela elnätet är byggt på växelström — den är enklare att transportera över långa avstånd.</p>
+
+    <p class="source">Källa i boken: 9.3 Elmotorn och elgeneratorn, s. 231.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>USA, Japan och delar av Sydamerika har växelström på <strong>60 Hz</strong> istället för Sveriges 50 Hz. Det är en av anledningarna till att vissa apparater inte fungerar utan adapter när du flyttar till annat land.</li>
+        <li>Solceller producerar bara <strong>likström</strong>. Det är därför villor med solpaneler har en speciell apparat — en <em>växelriktare</em> — som omvandlar likströmmen till växelström innan den matas in i elnätet.</li>
+        <li>Tack vare 50 Hz växelström <strong>blinkar gamla glödlampor</strong> faktiskt 100 gånger per sekund — för snabbt för ögat. Modern LED-belysning ger jämnt sken eftersom den först omvandlar till likström.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#t2">← T2: Kraftledningar</a>
+    <a href="#t4">Nästa: T4 Kompass →</a>
+  </div>
+</article>
+
+<!-- ====== T4 ====== -->
+<article class="card tricky" id="t4">
+  <div class="card-header">
+    <div class="card-num">T4</div>
+    <div class="card-title">
+      <div class="card-tag">Fördjupning</div>
+      <h2>Varför pekar inte en kompass exakt mot Nordpolen?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du står på en fjälltopp och tar fram en kompass och din mobiltelefon. Mobilens GPS visar att norr är <em>exakt</em> den vägen. Men kompassnålen pekar några grader åt sidan av det. Vem har rätt?</p>
+
+    <p><strong>Båda har rätt</strong> — de pekar bara på två olika "nord".</p>
+
+    <h3>Två olika "nord" finns</h3>
+    <ol>
+      <li><strong>Den geografiska Nordpolen</strong> — den fasta punkten där jordens rotationsaxel slutar. GPS, kartor och navigation utgår från den.</li>
+      <li><strong>Jordens magnetiska sydpol</strong> — den punkt på jorden där jordens magnetfält pekar nedåt. Den ligger i <strong>nordligaste Kanada</strong>, en bit ifrån geografiska Nordpolen.</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">Heter det inte magnetiska <em>Nord</em>polen?</div>
+      <p>Nej! Som vi lärde oss i kort 3 attraherar <strong>olika</strong> poler varandra. Kompassens <strong>nordspets</strong> dras alltid mot magnetens <strong>sydpol</strong>. Så den punkt som kompassens röda spets pekar mot måste vara en <strong>sydpol</strong> — alltså jordens magnetiska sydpol.</p>
+      <p>(Termen "magnetisk Nordpol" används ibland slarvigt i media, men strikt fysikaliskt sett ligger jordens <em>magnetiska sydpol</em> nära den geografiska Nordpolen.)</p>
+    </div>
+
+    <h3>Missvisning</h3>
+    <p>Vinkeln mellan den <strong>geografiska nordriktningen</strong> och den riktning <strong>kompassnålen pekar</strong> kallas <strong>missvisning</strong>. I Sverige är missvisningen ungefär <strong>5–10 grader</strong>, beroende på var i landet du är.</p>
+
+    <p>För moderna fartyg och flygplan har detta liten betydelse — de använder digitala kartor och satellitnavigation som kompenserar automatiskt. Men för en orienterare i skogen eller en fjällvandrare är det viktigt att känna till.</p>
+
+    <p class="source">Källa i boken: 9.1 Magnetism, s. 218.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Jordens magnetiska sydpol <strong>flyttar sig</strong> hela tiden — den rör sig faktiskt cirka 50 km per år! På grund av detta måste sjö- och flygkartor uppdateras regelbundet.</li>
+        <li>Vid ekvatorn ligger kompassen ungefär <strong>vågrätt</strong>, men ju längre norrut man kommer desto mer "lutar" magnetfältet nedåt. På Sydpolen pekar kompassen rakt upp i luften.</li>
+        <li>Forskare har byggt om datormodeller som visar att jordens magnetfält <strong>kan vara på väg att vändas</strong> — magnetiska Nord och Syd byter plats. Senast hände det för 780 000 år sedan, och processen tar några tusen år.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#t3">← T3: DC vs AC</a>
+    <a href="#t5">Nästa: T5 Dela en magnet →</a>
+  </div>
+</article>
+
+<!-- ====== T5 ====== -->
+<article class="card tricky" id="t5">
+  <div class="card-header">
+    <div class="card-num">T5</div>
+    <div class="card-title">
+      <div class="card-tag">Fördjupning</div>
+      <h2>Vad händer om man delar en magnet i två delar?</h2>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="lead">Tänk dig att du tar en stark stavmagnet och sågar den exakt mitt itu. En del med röd N och en del med vit S — eller? Hela tanken känns intuitiv: dela något i två och du får hälften av varje. Men i magneternas värld fungerar det <strong>inte</strong> så.</p>
+
+    <h3>Vad händer faktiskt?</h3>
+    <p>Du får <strong>två nya magneter</strong> — och var och en av dem har en <strong>egen nordpol och en egen sydpol</strong>. Det går alltså <strong>inte</strong> att dela en magnet så att man får "bara en N" eller "bara en S".</p>
+
+    <p>Det spelar ingen roll hur många gånger du delar magneten:</p>
+    <ul>
+      <li>Dela 1 magnet → 2 nya, mindre magneter (var med N+S)</li>
+      <li>Dela varje av dem igen → 4 ännu mindre magneter (var med N+S)</li>
+      <li>Och så vidare...</li>
+    </ul>
+
+    <p>Resultatet blir alltid <strong>nya, mindre magneter med både N och S</strong>.</p>
+
+    <h3>Varför fungerar det så?</h3>
+    <p>Som vi lärde oss i kort 3 är magnetism något som uppstår <strong>inifrån materialet</strong>. I järn (eller andra magnetiska material) är <strong>varje liten atom själv som en liten magnet</strong>. När alla dessa atomers små magnetfält pekar åt samma håll uppstår ett stort magnetfält som vi kan känna.</p>
+
+    <p>När du delar magneten på mitten delar du <strong>inte upp</strong> N från S — du delar bara upp en stor grupp atomer i två mindre grupper. Och i varje grupp finns fortfarande atomer som pekar åt samma håll → ny magnet med ny N och S.</p>
+
+    <div class="callout">
+      <div class="callout-title">Hur "tar man bort" magnetism då?</div>
+      <p>Den enda sättet att ta bort magnetismen är att <strong>röra om atomernas riktning</strong> — t.ex. genom att hetta upp magneten kraftigt, slå hårt på den, eller utsätta den för ett starkt motsatt magnetfält.</p>
+    </div>
+
+    <p class="source">Källa i boken: 9.1 Magnetism, s. 219.</p>
+
+    <div class="fact">
+      <div class="fact-header">
+        <span class="fact-icon">💡</span>
+        <span class="fact-title">Visste du att...</span>
+      </div>
+      <ul class="fact-list">
+        <li>Om du värmer en magnet över <strong>770 °C (Curie-temperaturen för järn)</strong> börjar atomerna röra sig så vilt att magnetismen helt försvinner — även om magneten kyls ner igen. Det är som att "skaka om" alla minimagneter.</li>
+        <li>Forskare har länge letat efter en så kallad <strong>"magnetisk monopol"</strong> — en partikel med bara N eller bara S. Trots 100 års sökande har ingen någonsin hittats.</li>
+        <li>Världens starkaste permanenta magneter — <strong>neodymmagneter</strong> — kan ge så starkt fält att två kraftiga magneter på handavstånd kan klämma fingrarna riktigt illa när de drar ihop sig.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer-nav">
+    <a href="#t4">← T4: Kompass</a>
+    <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">↑ Tillbaka upp</a>
+  </div>
+</article>
+
+<!-- ====== KLAR ====== -->
+<section style="margin-top: 64px; padding: 36px; background: linear-gradient(135deg, var(--ink) 0%, #2C4870 100%); border-radius: var(--radius); color: white; text-align: center;">
+  <div style="font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px;">Lycka till på provet! 🎯</div>
+  <p style="font-size: 17px; opacity: 0.9; max-width: 540px; margin: 0 auto;">Du har gått igenom ordlistan, alla 15 grundfrågor och 5 fördjupningsfrågor. Repetera de kort du tycker är svåra, och kom ihåg: <strong>förstå hellre än memorera</strong>.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+  // ===== Active nav highlighting on scroll =====
+  const navLinks = document.querySelectorAll('.nav-list a');
+  const sections = Array.from(document.querySelectorAll('article.card, section.glossary'));
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY + 120;
+    let current = sections[0];
+    for (const sec of sections) {
+      if (sec.offsetTop <= scrollY) current = sec;
+    }
+    if (current) {
+      navLinks.forEach(a => {
+        const target = a.getAttribute('href').substring(1);
+        a.classList.toggle('active', target === current.id);
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+</script>
+
+</body>
+</html>
